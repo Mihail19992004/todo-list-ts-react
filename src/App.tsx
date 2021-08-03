@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import {Header} from "./Components/Header";
+import './Style/index.scss'
+import {Search} from "./Components/Search";
+import {TodoList} from "./Components/TodoList";
+import {ITodo} from "./Types/interfaces";
 
 function App() {
+  const [todos, setTodos] = useState<ITodo[]>([])
+
+  function addTodo(todo: string) {
+    if (todo) {
+      setTodos(prevState => [...prevState, {todo,date: new Date(), completed:false}])
+    }
+
+    console.log(todos)
+  }
+
+  function removeTodo(id: Date) {
+    setTodos(todos.filter(todo=> todo.date !== id))
+  }
+  function completeTodo(id: Date) {
+    setTodos(todos.map(todo=> todo.date === id ? {...todo, completed: !todo.completed}: todo))
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Header />
+    <div className="content">
+      <Search addTodo={addTodo} />
+      <TodoList completeTodo={completeTodo} todos={todos} removeTodo={removeTodo} />
+    </div>
+
     </div>
   );
 }

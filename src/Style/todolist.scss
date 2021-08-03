@@ -1,0 +1,28 @@
+.todo-list-container {
+  margin: 0 auto;
+  max-width: 700px;
+  height: 800px;
+
+  text-align: center;
+  h2 {
+    margin: 10px;
+  }
+}
+.todo-arr {
+  width: 100%;
+  padding: 10px 0;
+
+  max-height: 90%;
+
+  overflow: auto;
+}
+.todo-item {
+  border-radius: 5px;
+  margin: 10px auto;
+  border: 1px solid black;
+  width: 60%;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
